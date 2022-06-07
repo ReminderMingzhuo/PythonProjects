@@ -1,0 +1,4 @@
+FloatLayout:
+ text: "Hello World"
+ halign: "center"
+ size_hint: 0.5, 1

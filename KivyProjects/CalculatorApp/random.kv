@@ -1,0 +1,89 @@
+MDBottomNavigationItem:
+                name: "files_navigation"
+                text: "DECISION MAKING"
+                icon: "lightbulb-on-outline"
+
+                MDGridLayout:
+                    cols:2
+                    rows:1
+                    spacing:20
+                    padding: 20
+
+                    MDTabs:
+                        id: datafiguretabs
+                        tab_hint_x: .5
+                        on_tab_switch: app.on_tab_switch(*args)
+
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        spacing:20
+                            pos_hint:{"top": 1}
+                            radius: 10,10,10,10
+
+                        ScreenManager:
+                            id: qa_sm
+
+                            QuestionScreen1:
+
+                            Screen:
+                                name:'QuestionScreen2'
+                                MDCard
+                                    id: qa
+                                    adaptive_height: True
+                                    elevation: 1
+                                    radius: [8, ]
+                                    orientation: "vertical"
+
+                                    Label:
+                                        id:question
+                                        text: "question1"
+                                        font_size: 25
+                                        size_hint_y: 0.2
+
+                                    ScrollView:
+
+                                        MDSelectionList:
+                                            id: selection_list
+                                            spacing: "12dp"
+                                            on_selected: app.on_selected(*args)
+                                            on_unselected: app.on_unselected(*args)
+
+                                    MDFillRoundFlatButton:
+                                        text: "SUBMIT"
+                                        font_style: 'Caption'
+                                        font_size: 20
+                                        size_hint: (.1,.1)
+                                        pos_hint: {"bottom":1,"center_x":.5}
+                                        on_release: root.parent.current = 'QuestionScreen1'
+
+<QuestionScreen1>
+    name: "QuestionScreen1"
+    MDCard:
+        id: qa
+        adaptive_height: True
+        elevation: 1
+        radius: [8, ]
+        orientation: "vertical"
+
+        Label:
+            id:question
+            text: "question1"
+            font_size: 25
+            size_hint_y: 0.2
+
+        ScrollView:
+
+            MDSelectionList:
+                id: selection_list
+                spacing: "12dp"
+                on_selected: app.on_selected(*args)
+                on_unselected: app.on_unselected(*args)
+
+            MDFillRoundFlatButton:
+                text: "SUBMIT"
+                font_style: 'Caption'
+                font_size: 20
+                size_hint: (.1,.1)
+                pos_hint: {"bottom":1,"center_x":.5}
+                on_release: root.parent.current = 'QuestionScreen2'

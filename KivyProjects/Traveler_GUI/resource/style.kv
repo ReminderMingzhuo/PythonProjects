@@ -1,0 +1,536 @@
+#:import Window kivy.core.window.Window
+#:import Factory kivy.factory.Factory
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:set color_deep_purple [0.36862745098,0.20784313725 ,0.69411764705,1]
+#:set color_deep_purple_dark [0.270588235,0.152941176 ,0.62745098,1]
+#:set color_deep_purple_light [0.701960784,0.615686275 ,0.858823529,1]
+#:set color_black [0.258823529,0.258823529 ,0.258823529,1]
+#:set color_black_dark [0.129411765,0.129411765 ,0.129411765,1]
+#:set color_black_light [0.811764706,0.847058824 ,0.862745098,1]
+
+<Card>:
+    elevation: 1
+    radius: [36, ]
+    padding: 16
+    height: 100
+    MDBoxLayout:
+        FitImage:
+            id: bg_image
+            source: "src/Traveler_GUI/resource/traveler.png"
+            size_hint_y: .35
+            pos_hint: {"top": 1}
+            radius: 36, 36, 0, 0
+
+<ListItemWithCheckbox@OneLineAvatarIconListItem>:
+    MyAvatar:
+        source: "src/Traveler_GUI/resource/node.png"
+    MyCheckbox:
+
+<IconListItem>
+
+    IconLeftWidget:
+        icon: root.icon
+
+MDScreen:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Traveler"
+            right_action_items: [["dots-vertical", lambda x: app.callback_1()], ["clock", lambda x: app.callback_2()]]
+            specific_text_color: 255/255, 204/255, 0/255, 1
+            md_bg_color: 42/255, 42/255, 42/255, 1
+            
+        MDBottomNavigation:
+            id: panel
+
+            MDBottomNavigationItem:
+                name: "files_control"
+                text: "ROBOT CONTROL"
+                icon: "robot-happy-outline"
+
+                MDGridLayout:
+                    cols: 3
+                    rows: 1
+                    MDBoxLayout:
+                        spacing:20
+                        padding: 20
+                        orientation: "vertical"                    
+                       
+                        MDBoxLayout:
+                            spacing:20
+                            size_hint_y: 0.3
+                            size_hint_x: 1
+                            orientation: "horizontal"
+                            MDCard:
+                                adaptive_height: True
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                FitImage:
+                                    source: "src/Traveler_GUI/resource/traveler.png"
+                                    size_hint_y: 1
+                                    pos_hint: {"top": 1,"right":0.9}
+                                    radius: 36, 36, 0, 0
+                        MDBoxLayout:
+                            size_hint_y: 0.2
+                            spacing:20
+                            orientation: "horizontal"
+
+                            MDCard:
+                                adaptive_height: True
+                                orientation: "vertical"
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "Temperature:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: temperature_text
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "28"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                MDProgressBar:
+                                    id: temperature
+                                    value: 50
+
+                            
+                        MDBoxLayout:
+                            size_hint_y: 0.2
+                            spacing:20
+                            orientation: "horizontal"
+                            MDCard:
+                                adaptive_height: True
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                orientation: "vertical"
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "ControllerErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: controller_error
+                                        font_style: "Body1"
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "EncoderErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: encoder_error
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "MotorErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: motor_error
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                            MDCard:
+                                adaptive_height: True
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                orientation: "vertical"
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "ControllerErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: controller_error
+                                        font_style: "Body1"
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "EncoderErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: encoder_error
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                MDBoxLayout:
+                                    size_hint_y: 0.2
+                                    orientation: "horizontal"
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "MotorErr:"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+                                    MDLabel:
+                                        id: motor_error
+                                        size_hint_x: 0.3
+                                        pos_hint_x: {"right":1}
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "0"
+                                        halign: "left"
+                                        height: self.texture_size[1]
+
+                    MDBoxLayout:
+                        spacing:20
+                        padding: 20
+                        orientation: "vertical"                    
+                       
+
+                        MDCard:
+                            orientation: "vertical" 
+                            adaptive_height: True
+                            elevation: 1
+                            radius: [8, ]
+                            padding: 8
+                            height: 10
+                            MDBoxLayout:
+                                padding: 15
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "Trajectories Selection"
+                                    height: self.texture_size[1]
+                                MDDropDownItem:
+                                    id: drop_item
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                    text: 'Right Triangle'
+                                    on_release: app.menu.open()
+                            MDBoxLayout:
+                                padding: 15
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "Drag Speed"
+                                    height: self.texture_size[1]
+                            MDSlider:
+                                id: drag_speed
+                                min: 0
+                                max: 100
+                                value: 40
+                                hint: False
+                                color: app.theme_cls.accent_color
+                                on_touch_up: app.on_change_speed()
+                            MDBoxLayout:
+                                padding: 15
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "Drag length"
+                                    height: self.texture_size[1]
+                            MDSlider:
+                                min: 0
+                                max: 100
+                                value: 40
+                                hint: False
+                                color: app.theme_cls.accent_color
+                            MDBoxLayout:
+                                padding: 15
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "Extrude Height"
+                                    height: self.texture_size[1]
+                            MDSlider:
+                                min: 0
+                                max: 100
+                                value: 40
+                                hint: False
+                                color: app.theme_cls.accent_color
+                            MDBoxLayout:
+                                padding: 15
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "Extrude Speed"
+                                    height: self.texture_size[1]
+                            MDSlider:
+                                min: 0
+                                max: 100
+                                value: 40
+                                hint: False
+                                color: app.theme_cls.accent_color
+                            
+                    
+                    MDBoxLayout:
+                        spacing:20
+                        padding: 20
+                        orientation: "vertical"                    
+                       
+                        MDBoxLayout:
+                            size_hint_y: 0.6
+                            spacing:20
+                            orientation: "horizontal"
+
+                            MDCard:
+                                adaptive_height: True
+                                orientation: "vertical"
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                MDBoxLayout:
+                                    padding: 15
+                                    size_hint_y:0.2
+                                    MDLabel:
+                                        font_style: "Body1"
+                                        theme_text_color: "Custom"
+                                        font_style: "Body1"
+                                        text_color:  255/255, 204/255, 0/255, 1
+                                        text: "Nodes To Run"
+                                        halign: "left"
+                                
+                                ScrollView:
+                                    MDList:
+                                        id: scroll
+
+                            
+                        MDBoxLayout:
+                            size_hint_y: 0.2
+                            spacing:20
+                            orientation: "horizontal"
+                            MDCard:
+                                adaptive_height: True
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                orientation: "vertical"
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "RUN"
+                                    halign: "left"
+                                    height: self.texture_size[1]
+                                MDBoxLayout:
+                                    orientation: "horizontal"
+                                    MDIconButton:
+                                        icon: "chevron-right-circle"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                                    MDIconButton:
+                                        icon: "pause-circle"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                                    MDIconButton:
+                                        icon: "close-octagon"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                            MDCard:
+                                adaptive_height: True
+                                elevation: 1
+                                radius: [8, ]
+                                padding: 16
+                                height: 10
+                                orientation: "vertical"
+                                MDLabel:
+                                    font_style: "Body1"
+                                    theme_text_color: "Custom"
+                                    font_style: "Body1"
+                                    text_color:  255/255, 204/255, 0/255, 1
+                                    text: "DEBUG"
+                                    halign: "left"
+                                    height: self.texture_size[1]
+                                
+                                MDBoxLayout:
+                                    orientation: "horizontal"
+                                    MDIconButton:
+                                        icon: "refresh-circle"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                                    MDIconButton:
+                                        icon: "close-box"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                                    MDIconButton:
+                                        icon: "record-rec"
+                                        pos_hint: {"center_x": .5, "center_y": .5}
+                                        user_font_size: "32sp"
+                                        theme_text_color: "Custom"
+                                        text_color: app.theme_cls.primary_color
+                              
+
+
+                    
+
+
+
+            MDBottomNavigationItem:
+                name: "files_navigation"
+                text: "DECISION MAKING"
+                icon: "lightbulb-on-outline"
+                
+                MDGridLayout:
+                    cols: 1
+                    rows: 2
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            font_style: "Body1"
+                            theme_text_color: "Primary"
+                            text: "Toggle to set custom panel color"
+                            halign: "center"
+                                            
+
+                        MDSwitch:
+                            size_hint: None, None
+                            size: dp(36), dp(48)
+                            pos_hint: {"center_x": .5}
+                            on_active:
+                                panel.panel_color = \
+                                [0.2980392156862745, 0.2823529411764706, 0.32941176470588235, 1] \
+                                if self.active else app.theme_cls.bg_dark
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        MDLabel:
+                            font_style: "Body1"
+                            theme_text_color: "Primary"
+                            text: "Toggle to set custom panel color"
+                            halign: "center"
+                                            
+
+                        MDSwitch:
+                            size_hint: None, None
+                            size: dp(36), dp(48)
+                            pos_hint: {"center_x": .5}
+                            on_active:
+                                panel.panel_color = \
+                                [0.2980392156862745, 0.2823529411764706, 0.32941176470588235, 1] \
+                                if self.active else app.theme_cls.bg_dark
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            MDBottomNavigationItem:
+                name: "SETTINGS"
+                text: "SETTINGS"
+                icon: "cog"
+                id: setting
+
+                MDLabel:
+                    font_style: "Body1"
+                    theme_text_color: "Primary"
+                    text: "SOME SETTINGS"
+                    halign: "center"

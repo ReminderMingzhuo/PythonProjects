@@ -1,0 +1,178 @@
+WindowManager:
+    FirstWindow:
+    SecondWindow:
+    ThirdWindow:
+    ForthWindow:
+
+
+
+
+
+<FirstWindow>:
+    name: "first"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Based on the data collected so far, \nselect which of the following beliefs you \ncurrently hold (you may select multiple)."
+            font_size: 32
+
+        GridLayout:
+            cols:2
+
+            CheckBox:
+                id: "c11"
+                on_active: root.checkbox_click(self, self.active,"A11")
+
+            Label:
+                text: "There are areas along the \ndune transect where data is needed"
+                font_size:20
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active, "A12")
+
+            Label:
+                text: "	There are portions of the dynamic range \nof the moisture variable where data is needed"
+                font_size:20
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active, "A13")
+
+            Label:
+                text: "	There is a discrepancy between the data \nand the hypothesis that needs additional evaluation"
+                font_size:20
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active, "A14")
+
+            Label:
+                text: "The data seems to be supporting the hypothesis \nso far but additional evaluation is needed"
+                font_size:20
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active, "A15")
+
+            Label:
+                text: "	I hold a different belief that is not described here"
+                font_size:20
+
+        Button:
+            id: submit
+            background_color: (1,1,1,1)
+            text: "submit"
+            font_size: 32
+            size_hint: (.2,.2)
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+            on_press:root.clear()
+
+<SecondWindow>:
+    name: "second"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Based on your belief rankings, \nRHex suggests sampling from one of the lettered \nlocations marked on the dune cross-section above."
+            font_size: 32
+
+        GridLayout:
+            cols:2
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active,"A21")
+
+            Label:
+                text: "Reject suggestions"
+                font_size:20
+
+
+
+        Button:
+            id: submit
+            background_color: (1,1,1,1)
+            text: "Submit"
+            font_size: 32
+            size_hint: (.2,.2)
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+            on_press:root.clear()
+
+
+
+<ThirdWindow>:
+    name: "third"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Why did you reject RHex's suggested locations?"
+            font_size: 32
+
+        GridLayout:
+            cols:2
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active,"A31")
+
+            Label:
+                text: "The suggested location did not address the beliefs \nI selected (The data seems to be supporting the hypothesis \nso far but additional evaluation is needed)"
+                font_size:20
+
+
+
+            CheckBox:
+                on_active: root.checkbox_click(self, self.active, "A32")
+
+            Label:
+                text: "I rejected the suggested location for a different reason"
+                font_size:20
+
+        Button:
+            id: submit
+            background_color: (1,1,1,1)
+            text: "Submit"
+            font_size: 32
+            size_hint: (.2,.2)
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = "forth"
+                root.manager.transition.direction = "left"
+            on_press:root.clear()
+
+
+
+
+
+<ForthWindow>:
+    name: "forth"
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            text: "Please describe your belief about the data collected so far"
+            font_size: 32
+
+        TextInput:
+            text: "Thank you!"
+            multiline: True
+            background_color: (1,1,1,1)
+
+        Button:
+            id: submit
+            background_color: (1,1,0,1)
+            text: "Go Back"
+            font_size: 32
+            size_hint: (.2,.2)
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = "right"
+            on_press:root.clear()
